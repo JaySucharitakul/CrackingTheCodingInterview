@@ -1,6 +1,5 @@
-package SortStack;
+package sortstack;
 
-import java.awt.*;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,7 +8,7 @@ class SortStackTest {
 
     @org.junit.jupiter.api.Test
     void push() {
-        SortStack stk = new SortStack();
+        SortStack<Integer> stk = new SortStack<>();
         stk.push(10);
         stk.push(9);
         stk.push(15);
@@ -26,7 +25,7 @@ class SortStackTest {
 
     @org.junit.jupiter.api.Test
     void pop() {
-        SortStack stk = new SortStack();
+        SortStack<Integer> stk = new SortStack<>();
         stk.push(10);
         stk.push(9);
         assertEquals(9, stk.pop().orElse(null));
@@ -36,7 +35,7 @@ class SortStackTest {
 
     @org.junit.jupiter.api.Test
     void isEmpty() {
-        SortStack stk = new SortStack();
+        SortStack<Integer> stk = new SortStack<>();
         assertTrue(stk.isEmpty());
         stk.push(42);
         assertFalse(stk.isEmpty());

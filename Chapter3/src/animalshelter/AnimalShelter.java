@@ -1,4 +1,4 @@
-package AnimalShelter;
+package animalshelter;
 
 public class AnimalShelter {
 }

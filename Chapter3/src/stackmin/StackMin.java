@@ -1,10 +1,10 @@
-package StackMin;
+package stackmin;
 
 import java.util.Stack;
 
 class StackMin extends Stack<Integer> {
     // stack containing the minimum values
-    private Stack<Integer> stkMin;
+    private final Stack<Integer> stkMin;
 
     public StackMin() {
         stkMin = new Stack<>();

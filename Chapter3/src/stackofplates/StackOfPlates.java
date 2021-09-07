@@ -1,4 +1,4 @@
-package StackOfPlates;
+package stackofplates;
 
 import java.util.LinkedList;
 import java.util.Optional;

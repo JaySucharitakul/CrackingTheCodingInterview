@@ -1,4 +1,4 @@
-package QueueViaStacks;
+package queueviastacks;
 
 public class QueueViaStacks {
 }
