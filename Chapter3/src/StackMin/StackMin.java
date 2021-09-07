@@ -1,3 +1,5 @@
+package StackMin;
+
 import java.util.Stack;
 
 class StackMin extends Stack<Integer> {
@@ -5,7 +7,7 @@ class StackMin extends Stack<Integer> {
     private Stack<Integer> stkMin;
 
     public StackMin() {
-        stkMin = new Stack<Integer>();
+        stkMin = new Stack<>();
     }
 
     public void Push(int value) {
