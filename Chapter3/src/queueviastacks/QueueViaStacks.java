@@ -3,7 +3,7 @@ package queueviastacks;
 import java.util.Optional;
 import java.util.Stack;
 
-public class QueueViaStacks <T extends Comparable<T>> {
+public class QueueViaStacks <T> {
     Stack<T> oldStack;
     Stack<T> newStack;
 
