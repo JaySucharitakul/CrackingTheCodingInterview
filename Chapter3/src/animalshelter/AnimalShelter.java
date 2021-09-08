@@ -3,9 +3,10 @@ package animalshelter;
 import javafx.util.Pair;
 
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Optional;
 
 public class AnimalShelter {
-
     LinkedList<Pair<String, Boolean>> animalQueue;
     LinkedList<String> dogQueue;
     LinkedList<String> catQueue;
@@ -25,15 +26,40 @@ public class AnimalShelter {
             catQueue.addLast(name);
     }
 
-    public String dequeueAny() {
-        return animalQueue.pop().getKey();
+    public Optional<String> dequeueAny() {
+        if (animalQueue.isEmpty())
+            return Optional.empty();
+
+        Pair<String, Boolean> animal = animalQueue.peek();
+        if (animal.getValue()) {
+            if (Objects.equals(animal.getKey(), dogQueue.peek()))
+                return Optional.empty();
+            dogQueue.pop();
+        } else {
+            if (!Objects.equals(animal.getKey(), catQueue.peek()))
+                return Optional.empty();
+            catQueue.pop();
+        }
+        return Optional.of(animalQueue.pop().getKey());
     }
 
-    public String dequeueDog() {
-        return dogQueue.pop();
+    public Optional<String> dequeueDog() {
+        if (dogQueue.isEmpty())
+            return Optional.empty();
+
+        String dogName = dogQueue.peek();
+        if (!animalQueue.remove(new Pair<>(dogName, true)))
+            return Optional.empty();
+        return Optional.of(dogQueue.pop());
     }
 
-    public String dequeueCat() {
-        return catQueue.pop();
+    public Optional<String> dequeueCat() {
+        if (catQueue.isEmpty())
+            return Optional.empty();
+
+        String catName = catQueue.peek();
+        if (!animalQueue.remove(new Pair<>(catName, true)))
+            return Optional.empty();
+        return Optional.of(catQueue.pop());
     }
 }

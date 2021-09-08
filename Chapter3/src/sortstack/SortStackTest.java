@@ -8,7 +8,7 @@ class SortStackTest {
 
     @org.junit.jupiter.api.Test
     void push() {
-        SortStack<Integer> stk = new SortStack<>();
+        SortStack<Integer> stk = new SortStack<Integer>();
         stk.push(10);
         stk.push(9);
         stk.push(15);
@@ -25,7 +25,7 @@ class SortStackTest {
 
     @org.junit.jupiter.api.Test
     void pop() {
-        SortStack<Integer> stk = new SortStack<>();
+        SortStack<Integer> stk = new SortStack<Integer>();
         stk.push(10);
         stk.push(9);
         assertEquals(9, stk.pop().orElse(null));
@@ -35,7 +35,7 @@ class SortStackTest {
 
     @org.junit.jupiter.api.Test
     void isEmpty() {
-        SortStack<Integer> stk = new SortStack<>();
+        SortStack<Integer> stk = new SortStack<Integer>();
         assertTrue(stk.isEmpty());
         stk.push(42);
         assertFalse(stk.isEmpty());
