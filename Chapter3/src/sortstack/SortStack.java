@@ -4,7 +4,11 @@ import java.util.Optional;
 import java.util.Stack;
 
 public class SortStack <T extends Comparable<T>> {
-    private Stack<T> stk = new Stack<>();
+    private Stack<T> stk;
+
+    public SortStack() {
+        stk = new Stack<>();
+    }
 
     public void push(T value) {
         if (isEmpty() || value.compareTo(stk.peek()) < 0)
