@@ -3,6 +3,7 @@ package routebetweennodes;
 import java.util.ArrayList;
 
 public class Node<T> {
+    private final int MAX_CHILDREN = 6;
     private final T name;
     private final ArrayList<Node<T>> children;
 
@@ -20,6 +21,9 @@ public class Node<T> {
     }
 
     public void addChild(Node<T> node) {
-        children.add(node);
+        if (MAX_CHILDREN != children.size())
+            children.add(node);
+        else
+            System.out.println("Max number of children reached");
     }
 }
