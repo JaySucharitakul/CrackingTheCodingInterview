@@ -1,4 +1,4 @@
-package listofdepths;
+package checkbalanced;
 
 import java.util.LinkedList;
 
@@ -44,16 +44,6 @@ public class BinaryTree {
             depthList.add(depthRow);
         } else {
             depthList.get(currentDepth).add(node);
-        }
-    }
-
-    public void printDepthList() {
-        for (int i = 0; i < depthList.size(); i++) {
-            System.out.println("Depth: " + i);
-            LinkedList<Node> currentDepth = depthList.get(i);
-            for (Node node : currentDepth) {
-                System.out.print(node + " ");
-            }
         }
     }
 }

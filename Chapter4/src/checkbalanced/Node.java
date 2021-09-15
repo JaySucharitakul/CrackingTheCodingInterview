@@ -1,4 +1,4 @@
-package listofdepths;
+package checkbalanced;
 
 public class Node {
     private final int value;

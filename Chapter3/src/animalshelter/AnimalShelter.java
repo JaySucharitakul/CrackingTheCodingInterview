@@ -7,9 +7,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AnimalShelter {
-    LinkedList<Pair<String, Boolean>> animalQueue;
-    LinkedList<String> dogQueue;
-    LinkedList<String> catQueue;
+    private final LinkedList<Pair<String, Boolean>> animalQueue;
+    private final LinkedList<String> dogQueue;
+    private final LinkedList<String> catQueue;
 
     public AnimalShelter() {
         animalQueue = new LinkedList<>();
@@ -20,7 +20,7 @@ public class AnimalShelter {
     public void enqueue(String name, boolean isDog) {
         Pair<String, Boolean> animalRegistry = new Pair<>(name, isDog);
         animalQueue.addLast(animalRegistry);
-        if (animalRegistry.getValue())
+        if (isDog)
             dogQueue.addLast(name);
         else
             catQueue.addLast(name);
@@ -58,7 +58,7 @@ public class AnimalShelter {
             return Optional.empty();
 
         String catName = catQueue.peek();
-        if (!animalQueue.remove(new Pair<>(catName, true)))
+        if (!animalQueue.remove(new Pair<>(catName, false)))
             return Optional.empty();
         return Optional.of(catQueue.pop());
     }
