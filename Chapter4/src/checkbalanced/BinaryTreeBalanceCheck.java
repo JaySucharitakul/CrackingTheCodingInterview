@@ -1,17 +1,45 @@
-package listofdepths;
+package checkbalanced;
 
 import java.util.LinkedList;
 
-public class BinaryTree<T extends Comparable<T>> {
+public class BinaryTreeBalanceCheck<T extends Comparable<T>> {
     private Node<T> root;
     private LinkedList<LinkedList<Node<T>>> depthList;
 
-    public BinaryTree() {
+    public BinaryTreeBalanceCheck() {
         root = null;
     }
 
-    public BinaryTree(int value) {
+    public BinaryTreeBalanceCheck(int value) {
         root = new Node<>(value);
+    }
+
+    public boolean isBalanced() {
+        return checkHeightRec(root) != Integer.MIN_VALUE;
+    }
+
+    private int checkHeightRec(Node<T> root) {
+        if (root == null)
+            return -1;
+
+        int leftHeight = checkHeightRec(root.getLeft());
+        if (leftHeight == Integer.MIN_VALUE)
+            return Integer.MIN_VALUE;
+        int rightHeight = checkHeightRec(root.getRight());
+        if (rightHeight == Integer.MIN_VALUE)
+            return Integer.MIN_VALUE;
+
+        int heightDiff = leftHeight - rightHeight;
+
+        if (Math.abs(heightDiff) > 1)
+            return Integer.MIN_VALUE;
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    private int getHeight(Node<T> node) {
+        if (node == null)
+            return 0;
+        return 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
     }
 
     public void addNode(int value) {
@@ -44,16 +72,6 @@ public class BinaryTree<T extends Comparable<T>> {
             depthList.add(depthRow);
         } else {
             depthList.get(currentDepth).add(node);
-        }
-    }
-
-    public void printDepthList() {
-        for (int i = 0; i < depthList.size(); i++) {
-            System.out.println("Depth: " + i);
-            LinkedList<Node<T>> currentDepth = depthList.get(i);
-            for (Node<T> node : currentDepth) {
-                System.out.print(node + " ");
-            }
         }
     }
 }

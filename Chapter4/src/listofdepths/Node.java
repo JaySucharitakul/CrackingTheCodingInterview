@@ -1,9 +1,9 @@
 package listofdepths;
 
-public class Node {
+public class Node<T> {
     private final int value;
-    private Node right;
-    private Node left;
+    private Node<T> right;
+    private Node<T> left;
     private int depth;
 
     public Node(int value) {
@@ -18,11 +18,11 @@ public class Node {
 
     public void setDepth(int depth) { this.depth = depth; }
 
-    public Node getRight() { return right; }
+    public Node<T> getRight() { return right; }
 
-    public void setRight(Node right) { this.right = right; }
+    public void setRight(Node<T> right) { this.right = right; }
 
-    public Node getLeft() { return left; }
+    public Node<T> getLeft() { return left; }
 
-    public void setLeft(Node left) { this.left = left; }
+    public void setLeft(Node<T> left) { this.left = left; }
 }
