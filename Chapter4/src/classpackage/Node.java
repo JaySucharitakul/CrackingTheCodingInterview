@@ -1,16 +1,16 @@
-package validatebst;
+package classpackage;
 
 public class Node<T> {
-    private final int value;
+    private final T value;
     private Node<T> right;
     private Node<T> left;
     private int depth;
 
-    public Node(int value) {
+    public Node(T value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 

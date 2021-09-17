@@ -1,36 +1,28 @@
 package listofdepths;
 
-import java.util.LinkedList;
+import classpackage.BinaryTree;
+import classpackage.Node;
 
-public class BinaryTree<T extends Comparable<T>> {
-    private Node<T> root;
+import java.util.LinkedList;
+import java.util.Optional;
+
+public class ListOfDepths<T extends Comparable<T>> extends BinaryTree<T> {
     private LinkedList<LinkedList<Node<T>>> depthList;
 
-    public BinaryTree() {
-        root = null;
-    }
-
-    public BinaryTree(int value) {
-        root = new Node<>(value);
-    }
-
-    public void addNode(int value) {
-        root = addNodeRec(root, 0, value);
-    }
-
-    public Node<T> addNodeRec(Node<T> root, int depth, int value) {
+    @Override
+    public Optional<Node<T>> addNodeRec(Node<T> root, int depth, T value) {
         if (root == null) {
             root = new Node<>(value);
             root.setDepth(depth);
             addToDepthList(root);
-            return root;
+            return Optional.of(root);
         }
 
-        if (value < root.getValue())
-            root.setLeft(addNodeRec(root.getLeft(), ++depth, value));
-        else if (value > root.getValue())
-            root.setRight(addNodeRec(root.getRight(), ++depth, value));
-        return root;
+        if (value.compareTo(root.getValue()) < 0)
+            root.setLeft(addNodeRec(root.getLeft(), ++depth, value).orElse(null));
+        else if (value.compareTo(root.getValue()) > 0)
+            root.setRight(addNodeRec(root.getRight(), ++depth, value).orElse(null));
+        return Optional.of(root);
     }
 
     public void addToDepthList(Node<T> node) {

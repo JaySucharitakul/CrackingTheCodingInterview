@@ -1,20 +1,37 @@
 package validatebst;
 
+import classpackage.BinaryTree;
+import classpackage.Node;
+
+import java.util.LinkedList;
+
 public class ValidateBst<T extends Comparable<T>> {
 
-    public boolean validateTree(BinaryTree<T> tree) {
-        Node<T> root = tree.getRoot();
-        return isBstRec(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    BinaryTree<T> tree;
+    public ValidateBst(BinaryTree<T> tree) {
+        this.tree = tree;
     }
 
-    private boolean isBstRec(Node<T> node, int min, int max) {
-        if (node == null)
-            return true;
+    public boolean validateTree() {
+        Node<T> root = tree.getRoot();
+        return isBst(root);
+    }
 
-        if (node.getValue() < min || node.getValue() > max)
-            return false;
+    private void storeInOrder(Node<T> root, LinkedList<T> array) {
+        if (root == null)
+            return;
+        storeInOrder(root.getLeft(), array);
+        array.add(root.getValue());
+        storeInOrder(root.getRight(), array);
+    }
 
-        return isBstRec(node.getLeft(), min, node.getValue() - 1)
-                && isBstRec(node.getRight(), node.getValue() + 1, max);
+    private boolean isBst(Node<T> root) {
+        LinkedList<T> array = new LinkedList<>();
+        storeInOrder(root, array);
+        for (int i = 1; i < array.size() - 1; i++) {
+            if (array.get(i).compareTo(array.get(i - 1)) < 0)
+                return false;
+        }
+        return true;
     }
 }

@@ -2,12 +2,12 @@ package routebetweennodes;
 
 import java.util.ArrayList;
 
-public class Node<T> {
+public class GraphNode<T> {
     private final int MAX_CHILDREN = 6;
     private final T name;
-    private final ArrayList<Node<T>> children;
+    private final ArrayList<GraphNode<T>> children;
 
-    public Node(T name) {
+    public GraphNode(T name) {
         this.name = name;
         children = new ArrayList<>();
     }
@@ -16,11 +16,11 @@ public class Node<T> {
         return name;
     }
 
-    public ArrayList<Node<T>> getChildren() {
+    public ArrayList<GraphNode<T>> getChildren() {
         return children;
     }
 
-    public void addChild(Node<T> node) {
+    public void addChild(GraphNode<T> node) {
         if (MAX_CHILDREN != children.size())
             children.add(node);
         else

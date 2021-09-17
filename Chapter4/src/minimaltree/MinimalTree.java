@@ -1,33 +1,34 @@
 package minimaltree;
 
+import classpackage.BinaryTree;
+import classpackage.Node;
+
 import java.util.Optional;
 
 public class MinimalTree<T extends Comparable<T>> {
-    private Node<T> root;
+    BinaryTree<T> tree;
 
-    public MinimalTree() {
-        root = null;
+    public MinimalTree(T[] array) {
+        tree = new BinaryTree<>(createMinimalTree(array));
     }
 
-    public MinimalTree(T value) {
-        root = new Node<>(value);
+    private Node<T> createMinimalTree(T[] array) {
+        return createTreeRec(array, 0, array.length - 1);
     }
 
-    public void addNode(T value) {
-        root = addNodeRec(root, value).orElse(null);
+    private Node<T> createTreeRec(T[] array, int start, int end) {
+        if (end > start)
+            return null;
+
+        int mid = (start + end) / 2;
+        Node<T> newNode = new Node<>(array[mid]);
+        newNode.setLeft(createTreeRec(array, start, mid - 1));
+        newNode.setRight(createTreeRec(array, mid + 1, end));
+
+        return newNode;
     }
 
-    public Optional<Node<T>> addNodeRec(Node<T> root, T value) {
-        if (root == null) {
-            root = new Node<>(value);
-            return Optional.of(root);
-        }
-
-        if (value.compareTo(root.getValue()) < 0)
-            root.setLeft(addNodeRec(root.getLeft(), value).orElse(null));
-        else if (value.compareTo(root.getValue()) > 0)
-            root.setRight(addNodeRec(root.getRight(), value).orElse(null));
-
-        return Optional.of(root);
+    public void printTree() {
+        tree.printTree();
     }
 }
