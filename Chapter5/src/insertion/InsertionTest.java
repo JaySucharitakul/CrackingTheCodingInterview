@@ -6,14 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InsertionTest {
 
+    public static String toBinaryString(int num) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < 32; i++) {
+            int lsb = num & 1;
+            str.insert(0, lsb);
+            num = num >> 1;
+        }
+        return str.toString();
+    }
+
     @Test
     void updateBits() {
-        int n = 100000000;
-        int m = 10011;
-
-        int result = Insertion.updateBits(n, m, 2, 6);
-
-        // test doesn't result correctly
-        assertEquals(101001100, result);
+        int a = 1024;
+        int b = 19;
+        int c = Insertion.updateBits(a, b, 2, 6);
+        assertEquals(toBinaryString(1100), toBinaryString(c));
     }
 }
